@@ -15,7 +15,7 @@ Here are the primary routing paradigms in Next.js:
 | Route Type | Folder Convention | Example URL | Path Parameter (`params`) | Description |
 | :--- | :--- | :--- | :--- | :--- |
 | **Static Route** | `app/about` | `/about` | None (`{}`) | Fixed, exact string match route. |
-| **Dynamic Segment** | `app/user/[id]` | `/user/123` | `{ id: "123" }` | Captures a single dynamic path segment. |
+| **Dynamic Segment** | `app/dynamic/[id]` | `/dynamic/123` | `{ id: "123" }` | Captures a single dynamic path segment. |
 | **Catch-All Segment** | `app/blog/[...slug]` | `/blog/a/b/c` | `{ slug: ["a", "b", "c"] }` | Captures one or more nested path segments. |
 | **Optional Catch-All**| `app/shop/[[...slug]]` | `/shop` or `/shop/a` | `{}` or `{ slug: ["a"] }` | Captures zero or more nested path segments. |
 | **Route Group** | `app/(auth)/login` | `/login` | None | Groups routes logically without affecting URL path. |
@@ -29,8 +29,10 @@ Here are the links to the actual files in this project to review the implementat
 * 🗄️ **Data File:** [ blogs.ts](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/data/%20blogs.ts) (Contains blog post mock data with nested slugs)
 * 📋 **Blog List:** [app/blog/page.tsx](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/app/blog/page.tsx) (Renders list of blogs linking to nested routes)
 * 🔗 **Blog Details (Catch-all):** [app/blog/[...slug]/page.tsx](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/app/blog/[...slug]/page.tsx) (Catches dynamic routes, compares arrays, and shows content)
-* 👤 **User Details (Dynamic Segment):** [app/user/[id]/page.tsx](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/app/user/%5Bid%5D/page.tsx) (Single parameter dynamic segment)
-* 🔐 **Auth Group Layout:** [app/(auth)/layout.tsx](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/app/(auth)/layout.tsx) (Shared layout for auth routes, excluding `/blog` or `/user`)
+* 👤 **Dynamic Route (Static Parent):** [app/dynamic/page.tsx](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/app/dynamic/page.tsx) (Parent list for testing dynamic routes)
+* 👤 **Dynamic Route Segment:** [app/dynamic/[id]/page.tsx](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/app/dynamic/%5Bid%5D/page.tsx) (Single parameter dynamic segment page)
+* 📐 **Dynamic Layout:** [app/dynamic/layout.tsx](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/app/dynamic/layout.tsx) (Shared layout wrapped around all pages in `/dynamic/*`)
+* 🔐 **Auth Group Layout:** [app/(auth)/layout.tsx](file:///Users/anupamgupta/Desktop/100xdev/MY-workSpace/nextlearn/app/(auth)/layout.tsx) (Shared layout for auth routes, excluding `/blog` or `/dynamic`)
 
 ---
 
@@ -46,19 +48,19 @@ These routes map directly 1:1 to a specific URL path. They have no dynamic place
 
 ### 2. Dynamic Segment (`[param]`) ⚡
 Used when a single path segment is dynamic (e.g., ID, username, or slug).
-* **Folder Structure:** `app/user/[id]/page.tsx`
+* **Folder Structure:** `app/dynamic/[id]/page.tsx`
 * **URLs Matched:** 
-  * `/user/45` $\rightarrow$ `params` = `{ id: "45" }`
-  * `/user/john` $\rightarrow$ `params` = `{ id: "john" }`
+  * `/dynamic/45` $\rightarrow$ `params` = `{ id: "45" }`
+  * `/dynamic/apple-device` $\rightarrow$ `params` = `{ id: "apple-device" }`
 * **Code Example (Next.js 15+ Async params):**
   ```tsx
   type Props = {
     params: Promise<{ id: string }>;
   };
 
-  export default async function UserPage({ params }: Props) {
+  export default async function DynamicSegmentPage({ params }: Props) {
     const { id } = await params;
-    return <h1>User Profile ID: {id}</h1>;
+    return <h1>Dynamic Segment Value: {id}</h1>;
   }
   ```
 
@@ -111,7 +113,7 @@ Always remember, in Next.js 15, `params` is a **Promise** and must be awaited be
 
 | File Pattern | URL Path | Awaited Params Value |
 | :--- | :--- | :--- |
-| `app/user/[id]/page.tsx` | `/user/5` | `{ id: '5' }` |
+| `app/dynamic/[id]/page.tsx` | `/dynamic/5` | `{ id: '5' }` |
 | `app/blog/[...slug]/page.tsx` | `/blog/js/es6` | `{ slug: ['js', 'es6'] }` |
 | `app/shop/[[...slug]]/page.tsx`| `/shop` | `{ slug: undefined }` |
 | `app/shop/[[...slug]]/page.tsx`| `/shop/a/b` | `{ slug: ['a', 'b'] }` |
