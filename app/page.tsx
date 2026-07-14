@@ -28,12 +28,35 @@ export default async function Page() {
           </div>
         </Link>
 
-        <Link href="/blog" style={{ flex: 1, textDecoration: "none", color: "inherit" }}>
+        <Link href="/catch-all" style={{ flex: 1, textDecoration: "none", color: "inherit" }}>
           <div style={{ padding: "20px", border: "2px solid #00dfd8", borderRadius: "8px", cursor: "pointer", transition: "transform 0.2s" }}>
             <h3 style={{ margin: 0, color: "#00b4b0" }}>🪝 Catch-All Route Demo</h3>
-            <p style={{ margin: "10px 0 0 0", fontSize: "0.9rem", color: "#666" }}>Learn how <code>/blog/[...slug]</code> matches multiple nested segments.</p>
+            <p style={{ margin: "10px 0 0 0", fontSize: "0.9rem", color: "#666" }}>Learn how <code>/catch-all/[...slug]</code> matches multiple nested segments.</p>
           </div>
         </Link>
+      </section>
+
+      <section style={{ display: "flex", gap: "20px", marginBottom: "45px" }}>
+        <div style={{ flex: 1, padding: "20px", border: "2px dashed #10b981", borderRadius: "8px" }}>
+          <h3 style={{ margin: 0, color: "#10b981" }}>🛡️ Route Group Demo (<code>(group)</code>)</h3>
+          <p style={{ margin: "10px 0 15px 0", fontSize: "0.9rem", color: "#666" }}>
+            These routes are nested inside <code>app/(group)</code> folder. Note that <code>(group)</code> is omitted from the URL path!
+          </p>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <Link 
+              href="/login" 
+              style={{ padding: "5px 15px", background: "#10b981", color: "white", textDecoration: "none", borderRadius: "4px", fontWeight: "bold" }}
+            >
+              Go to /login
+            </Link>
+            <Link 
+              href="/signup" 
+              style={{ padding: "5px 15px", border: "1px solid #10b981", color: "#10b981", textDecoration: "none", borderRadius: "4px", fontWeight: "bold" }}
+            >
+              Go to /signup
+            </Link>
+          </div>
+        </div>
       </section>
 
       <hr style={{ border: "0", borderTop: "1px solid #eaeaea", margin: "40px 0" }} />

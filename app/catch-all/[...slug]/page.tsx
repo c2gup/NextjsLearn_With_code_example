@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { blogs } from "@/data/ blogs";
 import chalk from "chalk";
+
 type Props = {
   params: Promise<{
     slug: string[];
   }>;
 };
 
-export default async function BlogDetails({ params }: Props) {
+export default async function CatchAllDetailsPage({ params }: Props) {
   const { slug } = await params;
   console.log(
     chalk.green("Received slug from URL params:"),
@@ -23,22 +24,24 @@ export default async function BlogDetails({ params }: Props) {
       }),
   );
 
-  console.log("Matched Blog:", matchedBlog);
+  console.log("Matched Post:", matchedBlog);
   if (!matchedBlog) {
     return (
-      <div style={{ padding: "20px" }}>
-        <h1>Blog Not Found</h1>
-        <p>Sorry, the blog you are looking for does not exist.</p>
-        <Link href="/blog">Back to all blogs</Link>
+      <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
+        <h1>Post Not Found</h1>
+        <p>Sorry, the post you are looking for does not exist.</p>
+        <Link href="/catch-all">Back to Catch-All List</Link>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <Link href="/blog">← Back to all blogs</Link>
-      <hr style={{ margin: "20px 0" }} />
-      <h1>{matchedBlog.title}</h1>
+    <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
+      <Link href="/catch-all">← Back to Catch-All List</Link>
+      <hr style={{ margin: "20px 0", borderColor: "#eee" }} />
+      
+      <h1>Catch-All Match Found: <code>{matchedBlog.title}</code></h1>
+      
       <p style={{ fontSize: "1.2rem", lineHeight: "1.6", marginTop: "20px" }}>
         {matchedBlog.content}
       </p>
@@ -46,13 +49,14 @@ export default async function BlogDetails({ params }: Props) {
       <div
         style={{
           marginTop: "40px",
-          padding: "10px",
+          padding: "15px",
           background: "#f4f4f4",
-          borderRadius: "5px",
+          borderRadius: "6px",
           color: "#333",
         }}
       >
-        <h4>Debug Info (URL Params):</h4>
+        <h4>Next.js Routing Info:</h4>
+        <p>URL parameter <code>slug</code> array resolved to:</p>
         <pre>{JSON.stringify(slug, null, 2)}</pre>
       </div>
     </div> 
