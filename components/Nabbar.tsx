@@ -2,10 +2,8 @@ import Link from "next/link";
 
 const navigation = [
   { label: "Home", href: "/" },
-
-  { label: "Courses", href: "/#courses" },
-  { label: "Pricing", href: "/#pricing" },
-  { label: "Login", href: "/auth/login" },
+  { label: "Intercepting Routes", href: "/intercepting-routes" },
+  { label: "Parallel Routes", href: "/parallel-routes" },
 ];
 
 export default function Navbar() {
@@ -33,7 +31,7 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 text-sm text-slate-200 shadow-lg shadow-black/10 md:flex">
-          {navigation.slice(0, 3).map((item) => (
+          {navigation.map((item) => (
             <Link
               key={item.label}
               href={item.href}

@@ -37,6 +37,22 @@ export default async function Page() {
       </section>
 
       <section style={{ display: "flex", gap: "20px", marginBottom: "45px" }}>
+        <Link href="/intercepting-routes" style={{ flex: 1, textDecoration: "none", color: "inherit" }}>
+          <div style={{ padding: "20px", border: "2px solid #ec4899", borderRadius: "8px", cursor: "pointer", transition: "transform 0.2s" }}>
+            <h3 style={{ margin: 0, color: "#ec4899" }}>🖼️ Intercepting Routes Demo</h3>
+            <p style={{ margin: "10px 0 0 0", fontSize: "0.9rem", color: "#666" }}>Learn how <code>(.)post/[id]</code> loads a route inside a modal overlay while masking the URL.</p>
+          </div>
+        </Link>
+
+        <Link href="/parallel-routes" style={{ flex: 1, textDecoration: "none", color: "inherit" }}>
+          <div style={{ padding: "20px", border: "2px solid #6366f1", borderRadius: "8px", cursor: "pointer", transition: "transform 0.2s" }}>
+            <h3 style={{ margin: 0, color: "#6366f1" }}>📊 Parallel Routes Demo</h3>
+            <p style={{ margin: "10px 0 0 0", fontSize: "0.9rem", color: "#666" }}>Learn how slots <code>@analytics</code> and <code>@team</code> render simultaneously in one view.</p>
+          </div>
+        </Link>
+      </section>
+
+      <section style={{ display: "flex", gap: "20px", marginBottom: "45px" }}>
         <div style={{ flex: 1, padding: "20px", border: "2px dashed #10b981", borderRadius: "8px" }}>
           <h3 style={{ margin: 0, color: "#10b981" }}>🛡️ Route Group Demo (<code>(group)</code>)</h3>
           <p style={{ margin: "10px 0 15px 0", fontSize: "0.9rem", color: "#666" }}>
