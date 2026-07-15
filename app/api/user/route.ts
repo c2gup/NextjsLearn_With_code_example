@@ -1,3 +1,13 @@
+
+interface Todo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+const todo: Todo[] = [];
+
 export async function GET(request: Request) {
   console.log("Request received");
 
@@ -7,5 +17,12 @@ export async function GET(request: Request) {
 
   const data = await res.json();
 
-  return Response.json(data);
+  todo.push(...data);
+  return Response.json({
+    status: "success",
+    message: "Data fetched successfully",
+    statusCode: 200,
+    success: true,
+    data: todo,
+  });
 }
