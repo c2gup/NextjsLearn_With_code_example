@@ -1,11 +1,11 @@
 import { contact } from "@/app/action/contact";
-
+import Form from "next/form";
 export default function ContactPage() {
   return (
     <div className="max-w-md mx-auto p-4">
       <h1 className="bg-amber-300">Contact Page</h1>
 
-      <form action={contact}>
+      <Form action={contact}>
         <input
           type="text"
           name="name"
@@ -35,7 +35,7 @@ export default function ContactPage() {
         >
           Submit
         </button>
-      </form>
+      </Form>
     </div>
   );
 }
